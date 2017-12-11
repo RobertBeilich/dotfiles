@@ -1,0 +1,60 @@
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo  = 'jiangmiao/auto-pairs'
+hook_add = '''
+augroup autopair_disabled
+    autocmd BufRead,BufNewFile *.lotgd let b:autopairs_enabled = 0
+augroup END
+'''
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+
+  " <TAB>: completion.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#manual_complete()
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+
+  " <S-TAB>: completion back.
+  inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+
+[[plugins]]
+repo = 'godlygeek/tabular'
+hook_add = '''
+  nmap <Leader>t= :Tabularize /=<CR>
+  vmap <Leader>t= :Tabularize /=<CR>
+  nmap <Leader>t: :Tabularize /:\zs<CR>
+  vmap <Leader>t: :Tabularize /:\zs<CR>
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+hook_add = '''
+  let g:UltiSnipsExpandTrigger = "<C-g>"
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+  let g:UltiSnipsEditSplit='vertical'
+  let g:UltiSnipsSnippetDirectories = ['~/.vim/bundle/repos/github.com/vim-snippets/UltiSnips', 'UltiSnips']
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'

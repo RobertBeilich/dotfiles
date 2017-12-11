@@ -1,0 +1,20 @@
+# vim: fdm=marker
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  autocmd User fugitive
+    \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+    \   nnoremap <buffer> .. :edit %:h<CR> |
+    \ endif
+
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+'''
+
+[[plugins]]
+repo = 'shumphrey/fugitive-gitlab.vim'
+hook_add = '''
+  let g:fugitive_gitlab_domains = ['https://gitlab.beilich.de']
+'''
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'

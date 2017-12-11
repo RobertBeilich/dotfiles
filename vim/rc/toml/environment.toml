@@ -1,0 +1,63 @@
+# vim: fdm=marker
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+[[plugins]]
+repo = 'tpope/vim-eunuch'
+
+[[plugins]]
+repo = 'pgdouyon/vim-evanesco'
+
+[[plugins]]
+repo = 'szw/vim-maximizer'
+hook_add = '''
+  let g:maximizer_restore_on_winleave = 1
+'''
+
+# {{{ tmux
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux'
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux-focus-events'
+# }}}
+
+[[plugins]]
+repo = 'gioele/vim-autoswap'
+hook_add = '''
+  let g:autoswap_detect_tmux = 1
+'''
+
+[[plugins]]
+repo = 'wesQ3/vim-windowswap'
+hook_add = '''
+  let g:windowswap_map_keys = 0
+  nnoremap <silent> <leader>sw :call WindowSwap#EasyWindowSwap()<CR>
+'''
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+hook_add = '''
+  let g:rooter_use_lcd = 1
+'''
+
+# {{{fzf
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'junegunn/fzf'
+hook_add = '''
+ nnoremap <silent > <leader>f<space> :Files<CR>
+ nnoremap <silent > <leader>fc :Commits<CR>
+'''
+# }}}

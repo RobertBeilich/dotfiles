@@ -1,0 +1,72 @@
+# vim: fdm=marker
+[ftplugin]
+_ = '''
+  let g:ale_fixers = [
+  \   'remove_trailing_lines',
+  \   'trim_whitespace',
+  \]
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+  let g:ale_fix_on_save = 1
+  let g:airline#extensions#ale#enabled = 1
+  let g:ale_fixers = {
+  \ 'java': [
+    \ 'remove_trailing_lines',
+    \ 'trim_whitespace',
+  \ ],
+  \}
+'''
+
+[[plugins]]
+repo = 'fntlnz/atags.vim'
+hook_add = '''
+  let g:atags_build_commands_list = [
+    \ 'dir="."; if [ -d ".git" ]; then dir=".git" fi',
+    \ 'ag -g "" | ctags --tag-relative -L - --fields=+l -f $dir/tags.tmp',
+    \ 'awk "length($0) < 400" $dir/tags.tmp > $dir/tags',
+    \ 'rm $dir/tags.tmp'
+    \ ]
+'''
+
+# {{{ typescript
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'mhartington/nvim-typescript'
+
+[[plugins]]
+repo = 'Quramy/tsuquyomi'
+hook_add = '''
+  let g:tsuquyomi_completion_detail = 1 " may be slow
+'''
+# }}}
+
+[[plugins]]
+repo = 'wellle/tmux-complete.vim'
+hook_add = '''
+  let g:tmuxcomplete#trigger = ''
+'''
+
+[[plugins]]
+repo = 'artur-shaik/vim-javacomplete2'
+hook_add = '''
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+depends = 'Shougo/deoplete.nvim'
+
+[[plugins]]
+repo = 'vim-latex/vim-latex'
+hook_add = '''
+  let g:Tex_DefaultTargetFormat = 'pdf'
+  let g:Tex_CompileRule_pdf = 'make'
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'

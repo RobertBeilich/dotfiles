@@ -1,0 +1,20 @@
+# vim: fdm=marker
+[[plugins]]
+repo = 'tpope/vim-projectionist'
+
+# {{{ angular
+[[plugins]]
+repo = 'bdauria/angular-cli.vim'
+
+# }}}
+
+# {{{ php
+[[plugins]]
+repo = 'lvht/phpcd.vim'
+
+[[plugins]]
+repo = 'noahfrederick/vim-composer'
+
+[[plugins]]
+repo = 'noahfrederick/vim-laravel'
+# }}}

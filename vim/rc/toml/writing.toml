@@ -1,0 +1,54 @@
+# vim: fdm=marker
+[[plugins]]
+repo = 'vimwiki/vimwiki'
+hook_add = '''
+  let g:vimwiki_valid_html_tags = 'b,i,s,u,sub,sup,kbd,br,hr,span,div'
+  let g:vimwiki_list = [
+    \{'path': '$HOME/vimwiki',
+    \ 'path_html': '$HOME/vimwiki_html'
+    \},
+    \{'path': '$HOME/lotgd/wiki',
+    \ 'path_html': '$HOME/lotgd/html',
+    \ 'ext': '.lotgd',
+    \ 'template_path': '$HOME/lotgd/templates',
+    \ 'template_default': 'default',
+    \ 'css_name': 'css/style.css',
+    \ 'template_ext': '.html'}
+    \]
+'''
+
+[[plugins]]
+repo = 'junegunn/limelight.vim'
+hook_add = '''
+  let g:limelight_default_coefficient = 0.8
+  nmap <Leader>l :Limelight!!<CR>
+  nmap <Leader>L :Limelight
+'''
+
+[[plugins]]
+repo = 'junegunn/goyo.vim'
+depends = 'junegunn/limelight.vim'
+hook_add = '''
+  function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowcmd
+    set scrolloff=999
+    call NumberAutoGroupOff()
+    Limelight
+  endfunction
+  
+  function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showcmd
+    set scrolloff=10
+    call NumberAutoGroupOn()
+    Limelight!
+  endfunction
+  
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+  
+  map <Leader>G :Goyo<CR>
+'''
