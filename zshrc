@@ -15,7 +15,7 @@ export EDITOR="$VISUAL"
 
 export DEFAULT_USER=sebaran
 export ZSH_CUSTOM=$HOME/.config/zsh
-export ZSH_THEME=agnoster
+export ZSH_THEME=mod_agnoster
 
 # History
 setopt append_history
