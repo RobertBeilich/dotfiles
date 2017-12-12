@@ -1,0 +1,197 @@
+set $mod Mod4
+
+set $workspace1 1:
+set $workspace2 2:
+set $workspace3 3:
+set $workspace4 4:
+set $workspace5 5
+set $workspace6 6
+set $workspace7 7
+set $workspace8 8
+set $workspace9 9:
+set $workspace10 10:
+
+# assign programs to workspaces
+assign [class="KeePass2"] $workspace9
+for_window [class="Spotify"] move to workspace $workspace10
+
+font pango:monospace 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+bindsym $mod+Return exec termite
+bindsym $mod+q exec /usr/bin/google-chrome-stable --disk-cache-dir=/tmp/ramdisk
+bindsym $mod+c exec
+
+#lock session
+bindsym $mod+control+l exec i3lock
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+bindsym $mod+d exec rofi -show run
+
+# focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move to second monitor
+bindsym $mod+p move workspace to output HDMI2
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+### layout ###
+smart_gaps on
+
+# disable borders
+for_window [class="^.*"] border pixel 0
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize shrink height 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  # gaps
+  bindsym i      mode "gaps_inner"
+  bindsym o      mode "gaps_outer"
+
+  # back to normal
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "gaps_inner" {
+  bindsym plus  gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+  bindsym 0     gaps inner current set 0
+
+  bindsym Shift+plus  gaps inner all plus 5
+  bindsym Shift+minus gaps inner all minus 5
+  bindsym Shift+0     gaps inner all set 0
+
+  bindsym r      mode "rezise"
+  bindsym o      mode "gaps_outer"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "gaps_outer" {
+  bindsym plus  gaps outer current plus 5
+  bindsym minus gaps outer current minus 5
+  bindsym 0     gaps outer current set 0
+
+  bindsym Shift+plus  gaps outer all plus 5
+  bindsym Shift+minus gaps outer all minus 5
+  bindsym Shift+0     gaps outer all set 0
+
+  bindsym r      mode "rezise"
+  bindsym i      mode "gaps_inner"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+### environment ###
+exec_always feh --bg-scale ~/Pictures/wallpapers/main.jpg
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id keepass
+
+#natural scrolling
+exec --no-startup-id synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-111 HorizScrollDelta=-111
+#touchpad clicks
+exec --no-startup-id synclient TapButton1=1 TapButton2=2 PalmDetect=1
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioMicMute exec --no-startup-id pactl list sources | grep -qi 'Mute: yes' && pactl set-source-mute 1 false || pactl set-source-mute 1 true #toggle current mic mute 
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec "light -A 5"
+bindsym XF86MonBrightnessDown exec "light -U 5"
+
+# switch keyboard layout
+bindsym XF86Search exec "setxkbmap us dvorak"
+bindsym XF86LaunchA exec "setxkbmap us"
+bindsym XF86Explorer exec "setxkbmap de nodeadkeys"
+
+bindsym $mod+Print exec scrot -e 'mv $f ~/Pictures/screenshots'
