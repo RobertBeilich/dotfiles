@@ -13,6 +13,9 @@ repo = 'tpope/vim-dispatch'
 repo = 'tpope/vim-eunuch'
 
 [[plugins]]
+repo = 'jeffkreeftmeijer/vim-numbertoggle'
+
+[[plugins]]
 repo = 'pgdouyon/vim-evanesco'
 
 [[plugins]]
