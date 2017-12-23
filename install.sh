@@ -22,6 +22,7 @@ backup() {
   backup_config $backupfolder "$HOME/.config/i3"
   backup_config $backupfolder "$HOME/.config/polybar"
   backup_config $backupfolder "$HOME/.config/termite"
+  backup_config $backupfolder "$HOME/bin"
 }
 
 backup_request() {
@@ -69,6 +70,10 @@ termite() {
   configure_config_folder "termite"
 }
 
+bin() {
+  ln -sf "$BASEDIR/bin" "$HOME/bin"
+}
+
 BASEDIR=$(realpath $(dirname "$0"))
 
 backup_request
@@ -78,3 +83,4 @@ tmux
 i3
 polybar
 termite
+bin
