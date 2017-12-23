@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run --rm -it --link mopidy:mopidy wernight/ncmpcpp ncmpcpp --host mopidy

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+read_config() {
+  input="$BASEDIR/mopidy.creds"
+
+  if [ ! -f $input ]; then
+    echo "$input does not exist. Please decrypt it."
+    exit -1
+  fi
+
+  spotify_user_regex="spotify/username=([a-z]*)"
+  spotify_pw_regex="spotify/password=(.*)"
+  spotify_client_id_regex="spotify/client_id=(.*)"
+  spotify_client_secret_regex="spotify/client_secret=(.*)"
+  soundcloud_auth_token_regex="soundcloud/auth_token=(.*)"
+  
+  while IFS= read -r var
+  do
+    [[ $var =~ $spotify_user_regex ]] && SPOTIFY_USER="${BASH_REMATCH[1]}"
+    [[ $var =~ $spotify_pw_regex ]] && SPOTIFY_PW="${BASH_REMATCH[1]}"
+    [[ $var =~ $spotify_client_id_regex ]] && SPOTIFY_CLIENT_ID="${BASH_REMATCH[1]}"
+    [[ $var =~ $spotify_client_secret_regex ]] && SPOTIFY_CLIENT_SECRET="${BASH_REMATCH[1]}"
+    [[ $var =~ $soundcloud_auth_token_regex ]] && SOUNDCLOUD_AUTH_TOKEN="${BASH_REMATCH[1]}"
+  done < "$input"
+}
+
+BASEDIR=$(realpath $(dirname "$0"))
+read_config
+start-pulseaudio-x11
+docker stop mopidy
+docker rm mopidy
+export HOST_IP=$(ip -o addr | grep 'docker0' | head -1 | grep -Eo '((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')
+export PULSE_PORT=$(pax11publish | grep -Eo 'tcp:[^ ]*'| head -1 | grep -Eo '[0-9]*')
+docker run -d \
+    -e "PULSE_SERVER=tcp:$HOST_IP:$PULSE_PORT" \
+    -e "PULSE_COOKIE_DATA=$(pax11publish -d | grep --color=never -Po '(?<=^Cookie: ).*')" \
+    -v "$PWD/media:/var/lib/mopidy/media:ro" \
+    -v "$PWD/local:/var/lib/mopidy/local" \
+    -p 6600:6600 -p 6680:6680 \
+    --name mopidy \
+    wernight/mopidy \
+    mopidy \
+    -o spotify/bitrate=320 \
+    -o gmusic/enabled=false \
+    -o spotify/username=$SPOTIFY_USER \
+    -o spotify/password=$SPOTIFY_PW \
+    -o spotify/client_id=$SPOTIFY_CLIENT_ID \
+    -o spotify/client_secret=$SPOTIFY_CLIENT_SECRET \
+    -o soundcloud/auth_token=$SOUNDCLOUD_AUTH_TOKEN
