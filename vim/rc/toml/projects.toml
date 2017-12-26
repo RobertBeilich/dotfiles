@@ -18,3 +18,33 @@ repo = 'noahfrederick/vim-composer'
 [[plugins]]
 repo = 'noahfrederick/vim-laravel'
 # }}}
+
+[[plugins]]
+repo = 'junegunn/vader.vim'
+hook_add = '''
+  " shamelessly copied from https://github.com/mhinz/dotfiles/blob/f2b2d2f6df3005bb6ba971f2f1cb2064aa77bbc9/.vim/autoload/mhi.vim#L282-L305
+  function! s:test()
+    if expand('%:e') == 'vim'
+      let testfile = printf('%s/%s.vader', expand('%:p:h'),
+            \ tr(expand('%:p:h:t'), '-', '_'))
+      if !filereadable(testfile)
+        echoerr 'File does not exist: '. testfile
+        return
+      endif
+      source %
+      execute 'Vader' testfile
+    else
+      let sourcefile = printf('%s/%s.vim', expand('%:p:h'),
+            \ tr(expand('%:p:h:t'), '-', '_'))
+      if !filereadable(sourcefile)
+        echoerr 'File does not exist: '. sourcefile
+        return
+      endif
+      execute 'source' sourcefile
+      Vader
+    endif
+  endfunction
+
+  autocmd BufRead *.{vader,vim}
+        \ command! -buffer Test call s:test()
+'''
