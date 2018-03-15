@@ -46,7 +46,7 @@ vnoremap <right> <nop>
 vnoremap <silent> <TAB> >gv
 vnoremap <silent> <S-TAB> <gv
 
-
+nnoremap ZT ggVG"+y:q!<CR>
 
 " nmap n :ShowSearchIndex<CR><Plug>Evanesco_n
 " nmap N :ShowSearchIndex<CR><Plug>Evanesco_N

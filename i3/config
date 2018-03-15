@@ -195,3 +195,6 @@ bindsym XF86LaunchA exec "setxkbmap us"
 bindsym XF86Explorer exec "setxkbmap de nodeadkeys"
 
 bindsym $mod+Print exec scrot -e 'mv $f ~/Pictures/screenshots'
+
+#program shortcuts
+bindsym $mod+g exec termite --exec "vim"
