@@ -31,10 +31,10 @@ hook_add = '''
     \ ]
 '''
 
-# {{{ typescript
 [[plugins]]
-repo = 'leafgarland/typescript-vim'
+repo = 'sheerun/vim-polyglot'
 
+# {{{ typescript
 [[plugins]]
 repo = 'mhartington/nvim-typescript'
 
@@ -60,16 +60,3 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/neco-vim'
 depends = 'Shougo/deoplete.nvim'
-
-[[plugins]]
-repo = 'vim-latex/vim-latex'
-hook_add = '''
-  let g:Tex_DefaultTargetFormat = 'pdf'
-  let g:Tex_CompileRule_pdf = 'make'
-'''
-
-[[plugins]]
-repo = 'cespare/vim-toml'
-
-[[plugins]]
-repo = 'fatih/vim-go'
