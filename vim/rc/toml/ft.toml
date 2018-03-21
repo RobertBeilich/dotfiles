@@ -60,3 +60,5 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/neco-vim'
 depends = 'Shougo/deoplete.nvim'
+[[plugins]]
+repo= 'PotatoesMaster/i3-vim-syntax'
