@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+function getTitles() {
+  entries=0
+  
+  lines=$(echo $result | perl -ne 'while(/<.*?watch\?v.*?>/g){print "$&\n";}' | perl -ne 'while(/.*(<.*?watch\?v.*>)/g){print "$1\n";}')
+  IFS=$'\n'
+  for line in $(echo "$lines")
+  do
+    if [[ $line == *'watch?v'* ]]; then
+      title=$(echo $line | awk -F'title="' '{print $2}' | awk -F'"' '{print $1}' |  sed '/^$/d' | perl -MHTML::Entities -pe 'decode_entities($_);')
+      echo "$line" >> /tmp/line
+      if [[ $title != '' && $title != ' ' ]]; then
+        play="https://youtube.com"
+        link=$(echo $line | awk -F'a href="' '{print $2}' | awk -F'"' '{print $1}')
+        if [[ $link == *'list='* ]]; then
+          list=$(echo $link | awk -F'list=' '{print $2}')
+          play+="/playlist?list=$list"
+        else
+          play+=$link
+        fi
+        if [[ "$entries" != 0 ]]; then
+          titles+="\n"
+        fi
+        titles+="$entries\t;;;$title;;;$play"
+        let "entries+= 1"
+      fi
+    fi	
+  done
+}
+
+titles=""
+input=`rofi -dmenu -p "Youtube Search" | sed 's/ /+/g'`
+result=$(curl -s "https://www.youtube.com/results?search_query=$input" 2>/dev/null)
+
+getTitles
+
+final_title=`echo -e $titles | awk -F';;;' '{print $1 $2}' | rofi -dmenu -p "Youtube Results"`
+
+index=`echo -e "$final_title" | awk -F'\t' '{print $1}'`
+urls=(`echo -e $titles | awk -F';;;' '{print $3}'`)
+final_play=${urls[$index]}
+
+mpv "$final_play"
