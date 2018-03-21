@@ -11,26 +11,16 @@ set $workspace8 8
 set $workspace9 9:
 set $workspace10 10:
 
-# assign programs to workspaces
-assign [class="KeePass2"] $workspace9
-for_window [class="Spotify"] move to workspace $workspace10
-
 font pango:monospace 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-bindsym $mod+Return exec termite
-bindsym $mod+q exec /usr/bin/google-chrome-stable --disk-cache-dir=/tmp/ramdisk
-bindsym $mod+c exec
 
 #lock session
 bindsym $mod+control+l exec i3lock
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-bindsym $mod+d exec rofi -show run
 
 # focus
 bindsym $mod+h focus left
@@ -197,4 +187,20 @@ bindsym XF86Explorer exec "setxkbmap de nodeadkeys"
 bindsym $mod+Print exec scrot -e 'mv $f ~/Pictures/screenshots'
 
 #program shortcuts
-bindsym $mod+g exec termite --exec "vim"
+for_window [class="^floating"] floating enable
+
+bindsym $mod+g mode "launcher"
+mode "launcher" {
+  bindsym t exec $HOME/bin/i3/floatlauncher termite; mode "default"
+  bindsym v split v; exec termite --exec "vim"; mode "default"
+  # back to normal
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+Return exec termite
+bindsym $mod+q exec /usr/bin/google-chrome-stable --disk-cache-dir=/tmp/ramdisk
+bindsym $mod+d exec rofi -show run
+
+# assign programs to workspaces
+assign [class="KeePass2"] $workspace9
