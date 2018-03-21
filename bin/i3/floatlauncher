@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+program=$@
+set $(slop -q -o -f '%x %y %w %h')
+if [[ "$program" =~ '^termite' ]]; then
+  i3-msg exec "termite --geometry=$3x$4 --class='floating'"
+else
+  i3-msg exec "$program"
+fi
+sleep 0.085
+i3-msg floating enable
+i3-msg resize set $3 $4
+i3-msg move position $1 $2
