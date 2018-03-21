@@ -18,3 +18,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'ludovicchabant/vim-lawrencium'
+
+[[plugins]]
+repo = 'mhinz/vim-signify'
+hook_add = '''
+  let g:signify_vcs_list = [ 'hg' ]
+'''
