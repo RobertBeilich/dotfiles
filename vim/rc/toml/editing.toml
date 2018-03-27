@@ -21,6 +21,9 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
+  let g:deoplete#omni#input_patterns = {}
+  let g:deoplete#omni#input_patterns.java = '[^. *\t]\.\w*'
+
   let g:deoplete#enable_at_startup = 1
 
   " <TAB>: completion.

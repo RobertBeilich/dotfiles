@@ -20,6 +20,20 @@ repo = 'noahfrederick/vim-laravel'
 # }}}
 
 [[plugins]]
+repo = 'starcraftman/vim-eclim'
+hook_add = '''
+  let g:EclimCompletionMethod = 'omnifunc'
+  function! s:eclimStart()
+    if eclim#PingEclim(0) == 0
+      Start! eclimd
+    endif
+  endfunction
+  command! EclimStart call s:eclimStart()
+  autocmd Filetype java call s:eclimStart()
+'''
+depends = 'tpope/vim-dispatch'
+
+[[plugins]]
 repo = 'junegunn/vader.vim'
 hook_add = '''
   " shamelessly copied from https://github.com/mhinz/dotfiles/blob/f2b2d2f6df3005bb6ba971f2f1cb2064aa77bbc9/.vim/autoload/mhi.vim#L282-L305
