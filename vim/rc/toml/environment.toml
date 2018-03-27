@@ -8,6 +8,11 @@ build = 'make'
 
 [[plugins]]
 repo = 'tpope/vim-dispatch'
+hook_add = '''
+  let s:tmux_session = 'env'
+  let g:tmux_session = s:tmux_session
+  silent exec '!tmux new-session -s env -d' | exec ':redraw!'
+'''
 
 [[plugins]]
 repo = 'tpope/vim-eunuch'
