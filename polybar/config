@@ -49,7 +49,9 @@ label = %title:0:30:...%
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
-wrapping-scroll = false
+strip-wsnumbers = true
+enable-click = false
+enable-scroll = false
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -58,12 +60,13 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %name%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline=
+; ${colors.primary}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = 2
+label-unfocused =
+label-unfocused-padding = 0
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
