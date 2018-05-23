@@ -1,6 +1,3 @@
-let mapleader=','
-let maplocalleader=','
-
 " save as root
 command W w !sudo tee % >/dev/null
 

@@ -3,6 +3,9 @@ function! s:source_rc(path) abort
   execute 'source' fnameescape(abspath)
 endfunction
 
+let mapleader=','
+let maplocalleader=','
+
 call s:source_rc('base.vim')
 call s:source_rc('dein.vim')
 call s:source_rc('mappings.vim')
