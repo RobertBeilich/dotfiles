@@ -5,6 +5,9 @@ repo = 'tpope/vim-projectionist'
 # {{{ angular
 [[plugins]]
 repo = 'bdauria/angular-cli.vim'
+hook_add = '''
+  autocmd VimEnter * if globpath('.,..','node_modules/@angular') != '' | call angular_cli#init() | endif
+'''
 
 # }}}
 
