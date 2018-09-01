@@ -59,3 +59,5 @@ hook_add = '''
 [[plugins]]
 repo = 'honza/vim-snippets'
 
+[[plugins]]
+repo = 'wellle/targets.vim'
