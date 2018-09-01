@@ -55,6 +55,7 @@ fi
 
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
+export PATH=$PATH:$HOME/.yarn/bin
 
 for plugin in ~/.config/zsh/plugins/*.zsh; do
   source $plugin
