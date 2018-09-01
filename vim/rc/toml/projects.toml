@@ -65,3 +65,14 @@ hook_add = '''
   autocmd BufRead *.{vader,vim}
         \ command! -buffer Test call s:test()
 '''
+
+[[plugins]]
+repo = 'jpalardy/vim-slime'
+hook_add = '''
+  if !empty($TMUX)
+    let g:slime_target = "tmux"
+    let g:slime_paste_file = tempname()
+    let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+    let g:slime_dont_ask_default = 1
+  endif
+'''
