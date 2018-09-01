@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+DATE=`date +%Y%m%d`
+mkdir /.snapshots/$DATE
+btrfs subvolume snapshot / /.snapshots/$DATE/root
+btrfs subvolume snapshot /var /.snapshots/$DATE/var
+btrfs subvolume snapshot /home /.snapshots/$DATE/home
