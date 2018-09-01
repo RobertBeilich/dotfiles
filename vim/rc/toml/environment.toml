@@ -65,7 +65,7 @@ build = './install --all'
 repo = 'junegunn/fzf.vim'
 depends = 'junegunn/fzf'
 hook_add = '''
- nnoremap <silent > <leader>f<space> :Files<CR>
- nnoremap <silent > <leader>fc :Commits<CR>
+  nnoremap <silent> <leader>f<space> :Files<CR>
+  nnoremap <silent> <leader>fc :Commits<CR>
 '''
 # }}}
