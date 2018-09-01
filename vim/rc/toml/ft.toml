@@ -64,3 +64,22 @@ depends = 'Shougo/deoplete.nvim'
 
 [[plugins]]
 repo= 'PotatoesMaster/i3-vim-syntax'
+
+# {{{python
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+hook_add = '''
+  let g:jedi#completions_enabled = 0
+  let g:jedi#show_call_signatures = 2
+  let g:jedi#goto_command = "gf"
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+
+[[plugins]]
+repo = 'tmhedberg/SimpylFold'
+
+[[plugins]]
+repo = 'Vimjas/vim-python-pep8-indent'
+# }}}
