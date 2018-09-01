@@ -1,9 +1,14 @@
 #!/bin/bash
-pac=$(checkupdates | wc -l)
-aur=$(cower -u | wc -l)
-
-check=$((pac + aur))
-if [[ "$check" != "0" ]]
-then
-    echo "$pac  $aur"
+pac="$(checkupdates 2>&1)"
+aur="$(yay -Qu)"
+if [[ $pac == "==> ERROR: Cannot fetch updates" ]]; then
+  pac="?"
+else
+  pac="$(echo "$pac" | wc -l)"
 fi
+if [[ $aur == *"Temporary failure in name resolution"* ]]; then
+  aur="?"
+else
+  aur=$(echo "$aur" | wc -l)
+fi
+echo "$pac  $aur"
