@@ -4,12 +4,14 @@ command W w !sudo tee % >/dev/null
 "always open help at top
 cnoreabbrev <expr> h ((getcmdtype() == ':' && getcmdpos() <= 2)? 'top h' : 'h')
 cnoreabbrev <expr> help ((getcmdtype() == ':' && getcmdpos() <= 5)? 'top help' : 'help')
-map <F1> :top help<CR>
+map <F1> :top help 
 
 inoremap jk <esc>
 nnoremap ä ddp
-nnoremap Ä ddkP
+nnoremap ö ddkP
 nnoremap Y y$
+
+nnoremap <space> za
 
 " move inside wrapped lines instead of jumping above
 nnoremap j gj
@@ -34,4 +36,5 @@ vnoremap <right> <nop>
 vnoremap <silent> <TAB> >gv
 vnoremap <silent> <S-TAB> <gv
 
-nnoremap ZT ggVG"+y:q!<CR>
+" copy all and close (without saving)
+nnoremap ZT ggVG"+yZQ<CR>
