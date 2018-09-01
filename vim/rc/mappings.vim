@@ -7,18 +7,9 @@ cnoreabbrev <expr> help ((getcmdtype() == ':' && getcmdpos() <= 5)? 'top help' :
 map <F1> :top help<CR>
 
 inoremap jk <esc>
-" nnoremap - ddp
-" nnoremap + ddkP
 nnoremap ä ddp
 nnoremap Ä ddkP
-" nnoremap ä <c-w>w
-" nnoremap Ä <c-w>W
 nnoremap Y y$
-
-nnoremap <c-w>H :topleft vnew<CR>
-nnoremap <c-w>J :botright new<CR>
-nnoremap <c-w>K :topleft new<CR>
-nnoremap <c-w>L :botright vnew<CR>
 
 " move inside wrapped lines instead of jumping above
 nnoremap j gj
@@ -44,6 +35,3 @@ vnoremap <silent> <TAB> >gv
 vnoremap <silent> <S-TAB> <gv
 
 nnoremap ZT ggVG"+y:q!<CR>
-
-" nmap n :ShowSearchIndex<CR><Plug>Evanesco_n
-" nmap N :ShowSearchIndex<CR><Plug>Evanesco_N
