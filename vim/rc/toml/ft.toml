@@ -24,17 +24,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'fntlnz/atags.vim'
-hook_add = '''
-  let g:atags_build_commands_list = [
-    \ 'dir="."; if [ -d ".git" ]; then dir=".git" fi',
-    \ 'ag -g "" | ctags --tag-relative -L - --fields=+l -f $dir/tags.tmp',
-    \ 'awk "length($0) < 400" $dir/tags.tmp > $dir/tags',
-    \ 'rm $dir/tags.tmp'
-    \ ]
-'''
-
-[[plugins]]
 repo = 'sheerun/vim-polyglot'
 
 # {{{ typescript
