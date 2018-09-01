@@ -41,12 +41,9 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'godlygeek/tabular'
+repo = 'tommcdo/vim-lion'
 hook_add = '''
-  nmap <Leader>t= :Tabularize /=<CR>
-  vmap <Leader>t= :Tabularize /=<CR>
-  nmap <Leader>t: :Tabularize /:\zs<CR>
-  vmap <Leader>t: :Tabularize /:\zs<CR>
+  let g:lion_squeeze_spaces = 1
 '''
 
 [[plugins]]
