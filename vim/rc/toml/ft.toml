@@ -37,6 +37,20 @@ hook_add = '''
 '''
 # }}}
 
+#{{{ html
+[[plugins]]
+repo = 'valloric/MatchTagAlways'
+#}}}
+
+#{{{ js
+[[plugins]]
+repo = 'ternjs/tern_for_vim'
+build = 'sudo npm install -g tern'
+
+[[plugins]]
+repo = 'carlitux/deoplete-ternjs'
+#}}}
+
 [[plugins]]
 repo = 'wellle/tmux-complete.vim'
 hook_add = '''
