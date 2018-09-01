@@ -59,5 +59,3 @@ hook_add = '''
 [[plugins]]
 repo = 'honza/vim-snippets'
 
-[[plugins]]
-repo = 'AndrewRadev/splitjoin.vim'
