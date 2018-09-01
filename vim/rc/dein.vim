@@ -7,6 +7,13 @@ if !isdirectory(s:path.'/repos')
 endif
 execute 'set runtimepath+='.s:path.'/repos/github.com/Shougo/dein.vim'
 
+function! s:deinCleanup()
+  call map(dein#check_clean(), "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endfunction
+
+command! DeinCleanup call s:deinCleanup()
+
 let s:toml_path = $HOME.'/.config/nvim/rc/toml'
 
 if !dein#load_state(s:path)
